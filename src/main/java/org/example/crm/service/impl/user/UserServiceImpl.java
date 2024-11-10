@@ -37,4 +37,17 @@ public class UserServiceImpl implements UserService {
         }
         return token;
     }
+
+    @Override
+    public boolean register(String username, String password) {
+        User user = userMapper.selectUserByUsername(username);
+        if (user != null) {
+            return false;
+        }
+        user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        userMapper.createUser(user);
+        return true;
+    }
 }

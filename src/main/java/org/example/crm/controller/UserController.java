@@ -25,4 +25,12 @@ public class UserController {
         }
         return CommonResult.success(token);
     }
+
+    @PostMapping("/register")
+    public CommonResult<String> register(@RequestParam String username, @RequestParam String password) {
+        if (userService.register(username, password)) {
+            return CommonResult.success("注册成功");
+        }
+        return CommonResult.failed("用户名已存在");
+    }
 }

@@ -6,4 +6,9 @@
     <select id="selectUserByUsername" resultType="org.example.crm.entity.user.User">
         SELECT * FROM user WHERE username = #{username};
     </select>
+
+    <insert id="createUser" parameterType="org.example.crm.entity.user.User">
+        INSERT INTO user (username, password)
+        VALUES (#{username}, #{password});
+    </insert>
 </mapper>

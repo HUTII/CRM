@@ -14,4 +14,13 @@ public interface UserService {
      * @return token
      */
     String login(String username, String password);
+
+    /**
+     * 用户注册
+     *
+     * @param username 用户名
+     * @param password 密码
+     * @return 是否注册成功
+     */
+    boolean register(String username, String password);
 }
