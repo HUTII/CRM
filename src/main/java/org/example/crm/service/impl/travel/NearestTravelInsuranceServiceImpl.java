@@ -16,6 +16,7 @@ import java.util.function.ToIntFunction;
 
 
 /**
+ * 临近算法服务接口实现
  * @author hutianlin
  * 2024/11/14 20:32
  */
@@ -34,6 +35,8 @@ public class NearestTravelInsuranceServiceImpl implements NearestTravelInsurance
     public TravelInsurance getNearestTravelInsurance(Long id) {
         TravelInsurance currentTravelInsurance = travelInsuranceMapper.selectById(id);
         List<TravelInsurance> travelInsurances = travelInsuranceMapper.selectAll();
+
+        // 计算各项指标的最大距离
         int priceMaxDistance = calculateMaxDistance(travelInsurances, TravelInsurance::getPrice);
         int effectPeriodMaxDistance = calculateMaxDistance(travelInsurances, TravelInsurance::getEffectPeriod);
         int tripDelayMaxDistance = calculateMaxDistance(travelInsurances, TravelInsurance::getTripDelay);
@@ -76,6 +79,7 @@ public class NearestTravelInsuranceServiceImpl implements NearestTravelInsurance
         }
         if (nearestTravelInsurance == null) {
             log.info("未找到最近的旅游保险");
+            return null;
         }
 
         if (minDistance > maximumDistance) {

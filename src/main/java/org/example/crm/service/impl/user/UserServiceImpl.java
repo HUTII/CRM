@@ -8,6 +8,7 @@ import org.example.crm.utils.JwtTokenUtil;
 import org.springframework.stereotype.Service;
 
 /**
+ * 用户服务接口实现
  * @author hutianlin
  * 2024/11/10 16:24
  */
@@ -20,13 +21,6 @@ public class UserServiceImpl implements UserService {
     @Resource
     private JwtTokenUtil jwtTokenUtil;
 
-    /**
-     * 用户登录
-     *
-     * @param username 用户名
-     * @param password 密码
-     * @return token
-     */
     @Override
     public String login(String username, String password) {
         String token = null;
@@ -38,12 +32,6 @@ public class UserServiceImpl implements UserService {
         return token;
     }
 
-    /**
-     * 用户注册
-     * @param username 用户名
-     * @param password 密码
-     * @return boolean是否注册成功
-     */
     @Override
     public boolean register(String username, String password) {
         User user = userMapper.selectUserByUsername(username);

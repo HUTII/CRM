@@ -3,6 +3,7 @@ package org.example.crm.service.travel;
 import org.example.crm.entity.travel.TravelInsurance;
 
 /**
+ * 临近算法服务接口
  * @author hutianlin
  * 2024/11/14 20:28
  */

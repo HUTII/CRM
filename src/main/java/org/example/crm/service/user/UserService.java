@@ -1,6 +1,7 @@
 package org.example.crm.service.user;
 
 /**
+ * 用户服务接口
  * @author hutianlin
  * 2024/11/10 16:24
  */
