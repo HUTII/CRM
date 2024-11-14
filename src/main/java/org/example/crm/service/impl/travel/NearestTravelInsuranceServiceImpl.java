@@ -6,6 +6,7 @@ import org.example.crm.mapper.travel.TravelInsuranceMapper;
 import org.example.crm.service.travel.NearestTravelInsuranceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -22,8 +23,12 @@ import java.util.function.ToIntFunction;
 public class NearestTravelInsuranceServiceImpl implements NearestTravelInsuranceService {
 
     private static final Logger log = LoggerFactory.getLogger(NearestTravelInsuranceServiceImpl.class);
+
     @Resource
     private TravelInsuranceMapper travelInsuranceMapper;
+
+    @Value("${travelInsurance.maximumDistance}")
+    private double maximumDistance;
 
     @Override
     public TravelInsurance getNearestTravelInsurance(Long id) {
@@ -48,7 +53,7 @@ public class NearestTravelInsuranceServiceImpl implements NearestTravelInsurance
             return null;
         }
 
-        double maxDistance = Double.MAX_VALUE;
+        double minDistance = Double.MAX_VALUE;
         TravelInsurance nearestTravelInsurance = null;
 
         for (TravelInsurance travelInsurance : travelInsurances) {
@@ -64,13 +69,18 @@ public class NearestTravelInsuranceServiceImpl implements NearestTravelInsurance
                     + Math.pow((double) Math.abs(currentTravelInsurance.getPersonalProperty() - travelInsurance.getPersonalProperty())/personalPropertyMaxDistance, 2)
                     + Math.pow((double) Math.abs(currentTravelInsurance.getPersonalLiability() - travelInsurance.getPersonalLiability())/personalLiabilityMaxDistance, 2));
 
-            if (distance < maxDistance) {
-                maxDistance = distance;
+            if (distance < minDistance) {
+                minDistance = distance;
                 nearestTravelInsurance = travelInsurance;
             }
         }
         if (nearestTravelInsurance == null) {
             log.info("未找到最近的旅游保险");
+        }
+
+        if (minDistance > maximumDistance) {
+            log.info("欧氏距离过远，返回null");
+            return null;
         }
         return nearestTravelInsurance;
     }
@@ -80,12 +90,23 @@ public class NearestTravelInsuranceServiceImpl implements NearestTravelInsurance
         List<TravelInsurance> travelInsurances = travelInsuranceMapper.selectAll();
         Map<Long, Integer> map = new HashMap<>();
 
-        /*for (TravelInsurance travelInsurance : travelInsurances) {
+        for (TravelInsurance travelInsurance : travelInsurances) {
+            map.merge(travelInsurance.getId(), 1, Integer::sum);
+        }
 
-        }*/
+        Map.Entry<Long, Integer> maxEntry = map.entrySet().stream().max(Map.Entry.comparingByValue()).orElse(null);
+        if (maxEntry != null) {
+            TravelInsurance mostPopularTravelInsurance = travelInsuranceMapper.selectById(maxEntry.getKey());
+            if (mostPopularTravelInsurance == null) {
+                log.info("未找到最受欢迎的旅游保险id对应的保险");
+            }
+            return mostPopularTravelInsurance;
+        }
+        log.info("未找到最受欢迎的旅游保险");
         return null;
     }
 
+    // 计算最大距离
     private int calculateMaxDistance(List<TravelInsurance> travelInsurances, ToIntFunction<TravelInsurance> mapper) {
         return travelInsurances.stream().mapToInt(mapper).max().orElse(0)
                 - travelInsurances.stream().mapToInt(mapper).min().orElse(0);

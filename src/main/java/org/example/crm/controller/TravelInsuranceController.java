@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 public class TravelInsuranceController {
 
     private static final Logger log = LoggerFactory.getLogger(TravelInsuranceController.class);
+
     @Resource
     private NearestTravelInsuranceService nearestTravelInsuranceService;
 
@@ -25,8 +26,12 @@ public class TravelInsuranceController {
     public CommonResult<TravelInsurance> getNearestTravelInsurance(@RequestParam Long id) {
         TravelInsurance travelInsurance = nearestTravelInsuranceService.getNearestTravelInsurance(id);
         if (travelInsurance == null) {
-            log.info("旅游保险数据异常，出现null值");
-            return CommonResult.failed("旅游保险数据异常，出现null值");
+            TravelInsurance mostPopularTravelInsurance = nearestTravelInsuranceService.getMostPopularTravelInsurance();
+            if (mostPopularTravelInsurance == null) {
+                log.info("最受欢迎的旅游保险服务调用异常，出现null值");
+                return CommonResult.failed("最受欢迎的旅游保险服务调用异常，出现null值");
+            }
+            return CommonResult.success(mostPopularTravelInsurance);
         }
         return CommonResult.success(travelInsurance);
     }
