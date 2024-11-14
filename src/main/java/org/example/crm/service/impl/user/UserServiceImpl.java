@@ -38,6 +38,12 @@ public class UserServiceImpl implements UserService {
         return token;
     }
 
+    /**
+     * 用户注册
+     * @param username 用户名
+     * @param password 密码
+     * @return boolean是否注册成功
+     */
     @Override
     public boolean register(String username, String password) {
         User user = userMapper.selectUserByUsername(username);
