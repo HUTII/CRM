@@ -3,6 +3,7 @@ package org.example.crm.controller;
 import jakarta.annotation.Resource;
 import org.example.crm.dto.common.CommonResult;
 import org.example.crm.entity.travel.TravelInsurance;
+import org.example.crm.service.travel.AssociatedTravelInsuranceService;
 import org.example.crm.service.travel.NearestTravelInsuranceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,9 +23,26 @@ public class TravelInsuranceController {
     @Resource
     private NearestTravelInsuranceService nearestTravelInsuranceService;
 
+    @Resource
+    private AssociatedTravelInsuranceService associatedTravelInsuranceService;
+
     @PostMapping("/getNearestTravelInsurance")
     public CommonResult<TravelInsurance> getNearestTravelInsurance(@RequestParam Long id) {
         TravelInsurance travelInsurance = nearestTravelInsuranceService.getNearestTravelInsurance(id);
+        if (travelInsurance == null) {
+            TravelInsurance mostPopularTravelInsurance = nearestTravelInsuranceService.getMostPopularTravelInsurance();
+            if (mostPopularTravelInsurance == null) {
+                log.info("最受欢迎的旅游保险服务调用异常，出现null值");
+                return CommonResult.failed("最受欢迎的旅游保险服务调用异常，出现null值");
+            }
+            return CommonResult.success(mostPopularTravelInsurance);
+        }
+        return CommonResult.success(travelInsurance);
+    }
+
+    @PostMapping("getAssociatedTravelInsurance")
+    public CommonResult<TravelInsurance> getAssociatedTravelInsurance(@RequestParam Long id) {
+        TravelInsurance travelInsurance = associatedTravelInsuranceService.getAssociatedTravelInsurance(id);
         if (travelInsurance == null) {
             TravelInsurance mostPopularTravelInsurance = nearestTravelInsuranceService.getMostPopularTravelInsurance();
             if (mostPopularTravelInsurance == null) {
