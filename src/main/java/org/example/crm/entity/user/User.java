@@ -42,4 +42,9 @@ public class User {
      * 年收入
      */
     private Integer annualIncome;
+
+    /**
+     * 年龄
+     */
+    private Integer age;
 }
