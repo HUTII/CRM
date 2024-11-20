@@ -20,7 +20,7 @@ public class MedicalAssociatedTest {
     @Test
     public void getAssociatedMedicalInsurance() {
         // 使用测试ID 5L 进行测试
-        MedicalInsurance medicalInsurance = associatedMedicalInsuranceService.getAssociatedMedicalInsurance(5L);
+        MedicalInsurance medicalInsurance = associatedMedicalInsuranceService.getAssociatedMedicalInsurance(3L);
         System.out.println(medicalInsurance);
     }
 }
