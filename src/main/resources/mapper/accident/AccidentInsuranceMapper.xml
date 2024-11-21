@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.example.crm.mapper.insurance.AccidentInsuranceMapper">
+<mapper namespace="org.example.crm.mapper.accident.AccidentInsuranceMapper">
 
     <!-- 查询所有意外保险 -->
-    <select id="selectAll" resultType="org.example.crm.entity.accident.AccidentInsurance">
+    <select id="findAll" resultType="org.example.crm.entity.accident.AccidentInsurance">
         SELECT
             id,
             name,
@@ -21,7 +21,7 @@
     </select>
 
     <!-- 根据ID查询意外保险 -->
-    <select id="selectById" resultType="org.example.crm.entity.accident.AccidentInsurance">
+    <select id="findById" resultType="org.example.crm.entity.accident.AccidentInsurance">
         SELECT
             id,
             name,
