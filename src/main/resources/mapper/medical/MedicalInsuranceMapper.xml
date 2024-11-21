@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.example.crm.mapper.insurance.MedicalInsuranceMapper">
+<mapper namespace="org.example.crm.mapper.medical.MedicalInsuranceMapper">
 
     <!-- 查询所有医疗保险 -->
     <select id="selectAll" resultType="org.example.crm.entity.medical.MedicalInsurance">
