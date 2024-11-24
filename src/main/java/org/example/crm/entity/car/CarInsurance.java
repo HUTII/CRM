@@ -4,6 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * @author ：eco
+ * @date ：Created in 2024/11/24 10:41
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -58,3 +62,4 @@ public class CarInsurance {
      */
     private String benefits;
 }
+
