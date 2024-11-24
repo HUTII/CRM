@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.example.crm.mapper.car.CarOrderRecordMapper">
+    <select id="selectAllUsername" resultType="java.lang.String">
+        SELECT DISTINCT user_id FROM car_insurance_record;
+    </select>
+
+    <select id="selectItemIdByUsername" resultType="java.lang.Long">
+        SELECT product_id FROM car_insurance_record WHERE user_id = #{username};
+    </select>
+</mapper>
