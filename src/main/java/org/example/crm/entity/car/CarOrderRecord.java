@@ -33,9 +33,9 @@ public class CarOrderRecord {
     private Integer age;
 
     /**
-     * 联系方式（电话、邮箱）
+     * 订单
      */
-    private String contactInfo;
+    private Integer product_id;
 
     /**
      * 地址
