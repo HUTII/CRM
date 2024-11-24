@@ -8,6 +8,6 @@
     </select>
 
     <select id="selectById" resultType="org.example.crm.entity.car.CarInsurance">
-        SELECT * FROM car_insurance WHERE id = #{id};
+        SELECT * FROM car_insurance WHERE product_id = #{id};
     </select>
 </mapper>
