@@ -81,7 +81,7 @@ public class AssociatedCarInsuranceServiceImpl implements AssociatedCarInsurance
         }
 
         if (carInsurance == null) {
-            log.info("关联算法未找到关联的旅游保险");
+            log.info("关联算法未找到关联的汽车保险");
             return null;
         }
 

@@ -13,9 +13,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CarOrderRecord {
     /**
+     * ID
+     */
+    private Integer id;
+
+    /**
      * 用户ID
      */
-    private Integer userId;
+    private Integer user_id;
 
     /**
      * 用户姓名
