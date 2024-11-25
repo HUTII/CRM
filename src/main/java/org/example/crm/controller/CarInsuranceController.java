@@ -9,10 +9,9 @@ import org.example.crm.service.car.AssociatedCarInsuranceService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;//getmapping
+
+import java.util.List;//list
 
 /**
  * @author ：eco
@@ -35,5 +34,19 @@ public class CarInsuranceController {
 
         }
         return CommonResult.success(carInsurance);
+    }
+
+    /**
+     * 获取所有的车险记录
+     * @return CommonResult 包含所有车险的列表
+     */
+    @GetMapping("/getAllCarInsurances")
+    public CommonResult<List<CarInsurance>> getAllCarInsurances() {
+        List<CarInsurance> carInsuranceList = associatedCarInsuranceService.getAllCarInsurances();
+        if (carInsuranceList == null || carInsuranceList.isEmpty()) {
+            log.info("获取所有车险记录时出现问题，记录为空");
+            return CommonResult.failed("获取所有车险记录失败或数据为空");
+        }
+        return CommonResult.success(carInsuranceList);
     }
 }

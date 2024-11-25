@@ -142,4 +142,15 @@ public class AssociatedCarInsuranceServiceImpl implements AssociatedCarInsurance
 
         return twoTermSetMap;
     }
+
+
+    //获取所有车险
+    public AssociatedCarInsuranceServiceImpl(CarInsuranceMapper carInsuranceMapper) {
+        this.carInsuranceMapper = carInsuranceMapper;
+    }
+
+    @Override
+    public List<CarInsurance> getAllCarInsurances() {
+        return carInsuranceMapper.selectAll();
+    }
 }
