@@ -18,7 +18,7 @@ public class AccidentNearestTest {
 
     @Test
     public void findNearestAccidentInsuranceTest() {
-        AccidentInsurance accidentInsurance = nearestAccidentInsuranceService.findNearestAccidentInsurance(5L);
+        AccidentInsurance accidentInsurance = nearestAccidentInsuranceService.findNearestAccidentInsurance(6L);
         System.out.println(accidentInsurance);
     }
 }
