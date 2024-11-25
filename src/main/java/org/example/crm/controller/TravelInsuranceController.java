@@ -3,11 +3,14 @@ package org.example.crm.controller;
 import jakarta.annotation.Resource;
 import org.example.crm.dto.common.CommonResult;
 import org.example.crm.entity.travel.TravelInsurance;
+import org.example.crm.mapper.travel.TravelInsuranceMapper;
 import org.example.crm.service.travel.AssociatedTravelInsuranceService;
 import org.example.crm.service.travel.NearestTravelInsuranceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author hutianlin
@@ -25,6 +28,9 @@ public class TravelInsuranceController {
 
     @Resource
     private AssociatedTravelInsuranceService associatedTravelInsuranceService;
+
+    @Resource
+    private TravelInsuranceMapper travelInsuranceMapper;
 
     @PostMapping("/getNearestTravelInsurance")
     public CommonResult<TravelInsurance> getNearestTravelInsurance(@RequestParam Long id) {
@@ -52,5 +58,15 @@ public class TravelInsuranceController {
             return CommonResult.success(mostPopularTravelInsurance);
         }
         return CommonResult.success(travelInsurance);
+    }
+
+    @PostMapping("/getAllTravelInsurance")
+    public CommonResult<List<TravelInsurance>> getAllTravelInsurance() {
+        List<TravelInsurance> travelInsuranceList = travelInsuranceMapper.selectAll();
+        if (travelInsuranceList == null) {
+            log.info("查询所有旅游保险服务调用异常，出现null值");
+            return CommonResult.failed("查询所有旅游保险服务调用异常，出现null值");
+        }
+        return CommonResult.success(travelInsuranceList);
     }
 }
