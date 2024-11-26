@@ -13,11 +13,10 @@ import java.util.List;
  * 意外险控制器
  * 提供意外险相关服务的接口
  * @author dxy
- * @date 2024/11/26
+ * 2024/11/26
  */
 @RestController
 @RequestMapping("/accidentInsurance")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AccidentInsuranceController {
 
     private static final Logger log = LoggerFactory.getLogger(AccidentInsuranceController.class);

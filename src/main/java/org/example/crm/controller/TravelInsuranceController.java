@@ -18,7 +18,6 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/travelInsurance")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TravelInsuranceController {
 
     private static final Logger log = LoggerFactory.getLogger(TravelInsuranceController.class);
@@ -68,5 +67,15 @@ public class TravelInsuranceController {
             return CommonResult.failed("查询所有旅游保险服务调用异常，出现null值");
         }
         return CommonResult.success(travelInsuranceList);
+    }
+
+    @PostMapping("/getTravelInsuranceById")
+    public CommonResult<TravelInsurance> getTravelInsuranceById(@RequestParam Long id) {
+        TravelInsurance travelInsurance = travelInsuranceMapper.selectById(id);
+        if (travelInsurance == null) {
+            log.info("根据id查询旅游保险服务调用异常，出现null值");
+            return CommonResult.failed("根据id查询旅游保险服务调用异常，出现null值");
+        }
+        return CommonResult.success(travelInsurance);
     }
 }

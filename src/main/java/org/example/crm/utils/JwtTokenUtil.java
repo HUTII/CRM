@@ -66,6 +66,9 @@ public class JwtTokenUtil {
 
     private Date getExpirationDateFromToken(String token) {
         Claims claims = getClaimsFromToken(token);
+        if (claims == null) {
+            return null; // or handle the error as needed
+        }
         return claims.getExpiration();
     }
 

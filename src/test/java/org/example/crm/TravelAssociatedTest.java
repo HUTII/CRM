@@ -3,6 +3,7 @@ package org.example.crm;
 import jakarta.annotation.Resource;
 import org.example.crm.entity.travel.TravelInsurance;
 import org.example.crm.service.travel.AssociatedTravelInsuranceService;
+import org.example.crm.service.travel.NearestTravelInsuranceService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -16,9 +17,14 @@ public class TravelAssociatedTest {
     @Resource
     private AssociatedTravelInsuranceService associatedTravelInsuranceService;
 
+    @Resource
+    private NearestTravelInsuranceService nearestTravelInsuranceService;
+
     @Test
     public void getAssociatedTravelInsurance() {
         TravelInsurance travelInsurance = associatedTravelInsuranceService.getAssociatedTravelInsurance(5L);
+        System.out.println(travelInsurance);
+        travelInsurance = nearestTravelInsuranceService.getNearestTravelInsurance(5L);
         System.out.println(travelInsurance);
     }
 }

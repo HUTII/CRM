@@ -12,13 +12,12 @@ import org.springframework.web.bind.annotation.*;
  * 医疗保险相关接口控制器
  * 仅包含获取关联医疗保险的方法
  *
- * @author
- * @date 2024/11/21
+ * @author jsh
+ * 2024/11/21
  */
 
 @RestController
 @RequestMapping("/medicalInsurance")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class MedicalInsuranceController {
 
     private static final Logger log = LoggerFactory.getLogger(MedicalInsuranceController.class);
