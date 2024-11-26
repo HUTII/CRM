@@ -12,8 +12,8 @@ import java.util.List;
 /**
  * 意外险控制器
  * 提供意外险相关服务的接口
- * @author
- * @date 2024/11/07
+ * @author dxy
+ * @date 2024/11/26
  */
 @RestController
 @RequestMapping("/accidentInsurance")
@@ -55,10 +55,5 @@ public class AccidentInsuranceController {
         }
         return CommonResult.success(AccidentInsuranceList);
     }
-    /**
-     * 获取关联的意外保险
-     * @param id 意外保险ID
-     * @return 关联的意外保险
-     */
 
 }
