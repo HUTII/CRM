@@ -40,4 +40,13 @@ public class UserController {
         }
         return CommonResult.failed("token无效");
     }
+
+    @PostMapping("/getUsername")
+    public CommonResult<String> getUsername(@RequestParam String token) {
+        String username = userService.getUsername(token);
+        if (username == null) {
+            return CommonResult.failed("token无效");
+        }
+        return CommonResult.success(username);
+    }
 }

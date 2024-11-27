@@ -4,6 +4,7 @@ import jakarta.annotation.Resource;
 import org.example.crm.dto.common.CommonResult;
 
 import org.example.crm.entity.car.CarInsurance;
+import org.example.crm.mapper.car.CarInsuranceMapper;
 import org.example.crm.service.car.AssociatedCarInsuranceService;
 
 
@@ -25,6 +26,9 @@ public class CarInsuranceController {
     @Resource
     private AssociatedCarInsuranceService associatedCarInsuranceService;
 
+    @Resource
+    private CarInsuranceMapper carInsuranceMapper;
+
     @PostMapping("/getAssociatedCarInsurance")
     public CommonResult<CarInsurance> getAssociatedCarInsurance(@RequestParam Long id) {
         CarInsurance carInsurance = associatedCarInsuranceService.getAssociatedCarInsurance(id);
@@ -40,7 +44,7 @@ public class CarInsuranceController {
      * 获取所有的车险记录
      * @return CommonResult 包含所有车险的列表
      */
-    @GetMapping("/getAllCarInsurances")
+    @PostMapping("/getAllCarInsurances")
     public CommonResult<List<CarInsurance>> getAllCarInsurances() {
         List<CarInsurance> carInsuranceList = associatedCarInsuranceService.getAllCarInsurances();
         if (carInsuranceList == null || carInsuranceList.isEmpty()) {
@@ -49,4 +53,15 @@ public class CarInsuranceController {
         }
         return CommonResult.success(carInsuranceList);
     }
+
+    @PostMapping("/getCarInsuranceByCarId")
+    public CommonResult<CarInsurance> getCarInsuranceByCarId(@RequestParam Long id) {
+        CarInsurance carInsurance = carInsuranceMapper.selectById(id);
+        if (carInsurance == null) {
+            log.info("根据车辆id获取车险记录时出现问题，记录为空");
+            return CommonResult.failed("根据车辆id获取车险记录失败或数据为空");
+        }
+        return CommonResult.success(carInsurance);
+    }
+
 }

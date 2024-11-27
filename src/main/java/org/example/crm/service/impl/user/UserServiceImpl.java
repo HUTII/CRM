@@ -49,4 +49,9 @@ public class UserServiceImpl implements UserService {
     public boolean validateToken(String token) {
         return jwtTokenUtil.validateToken(token);
     }
+
+    @Override
+    public String getUsername(String token) {
+        return jwtTokenUtil.getUsernameFromToken(token);
+    }
 }

@@ -32,4 +32,12 @@ public interface UserService {
      * @return 是否有效
      */
     boolean validateToken(String token);
+
+    /**
+     * 获取用户名
+     *
+     * @param token token
+     * @return 用户名
+     */
+    String getUsername(String token);
 }
