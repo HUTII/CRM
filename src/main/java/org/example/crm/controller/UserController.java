@@ -32,4 +32,12 @@ public class UserController {
         }
         return CommonResult.failed("用户名已存在");
     }
+
+    @PostMapping("/validateToken")
+    public CommonResult<Boolean> validateToken(@RequestParam String token) {
+        if (userService.validateToken(token)) {
+            return CommonResult.success(true);
+        }
+        return CommonResult.failed("token无效");
+    }
 }

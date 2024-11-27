@@ -95,6 +95,9 @@ public class JwtTokenUtil {
      */
     public boolean validateToken(String token) {
         Date expiration = getExpirationDateFromToken(token);
+        if (expiration == null) {
+            return false;
+        }
         return expiration.after(new Date());
     }
 

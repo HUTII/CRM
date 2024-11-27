@@ -45,6 +45,7 @@ public class AccidentInsuranceController {
         }
         return CommonResult.success(accidentInsurance);
     }
+
     @PostMapping("/getAllAccidentInsurance")
     public CommonResult<List<AccidentInsurance>> getAllAccidentInsurance() {
         List<AccidentInsurance> AccidentInsuranceList = accidentInsuranceMapper.findAll();
@@ -53,6 +54,16 @@ public class AccidentInsuranceController {
             return CommonResult.failed("查询所有旅游保险服务调用异常，出现null值");
         }
         return CommonResult.success(AccidentInsuranceList);
+    }
+
+    @PostMapping("/getAccidentInsuranceById")
+    public CommonResult<AccidentInsurance> getAccidentInsuranceById(@RequestParam Long id) {
+        AccidentInsurance accidentInsurance = accidentInsuranceMapper.findById(id);
+        if (accidentInsurance == null) {
+            log.info("查询旅游保险服务调用异常，出现null值");
+            return CommonResult.failed("查询旅游保险服务调用异常，出现null值");
+        }
+        return CommonResult.success(accidentInsurance);
     }
 
 }

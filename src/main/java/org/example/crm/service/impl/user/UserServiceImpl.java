@@ -44,4 +44,9 @@ public class UserServiceImpl implements UserService {
         userMapper.createUser(user);
         return true;
     }
+
+    @Override
+    public boolean validateToken(String token) {
+        return jwtTokenUtil.validateToken(token);
+    }
 }

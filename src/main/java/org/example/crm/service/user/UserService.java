@@ -24,4 +24,12 @@ public interface UserService {
      * @return 是否注册成功
      */
     boolean register(String username, String password);
+
+    /**
+     * 验证token
+     *
+     * @param token token
+     * @return 是否有效
+     */
+    boolean validateToken(String token);
 }
