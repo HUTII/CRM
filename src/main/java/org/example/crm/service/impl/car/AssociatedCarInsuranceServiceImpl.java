@@ -153,4 +153,25 @@ public class AssociatedCarInsuranceServiceImpl implements AssociatedCarInsurance
     public List<CarInsurance> getAllCarInsurances() {
         return carInsuranceMapper.selectAll();
     }
+
+    @Override
+    public CarInsurance getMostPopularCarInsurance() {
+        List<CarInsurance> carInsurances = carInsuranceMapper.selectAll();
+        Map<Long, Integer> map = new HashMap<>();
+
+        for (CarInsurance carInsurance : carInsurances) {
+            map.merge(carInsurance.getProductId(), 1, Integer::sum);
+        }
+
+        Map.Entry<Long, Integer> maxEntry = map.entrySet().stream().max(Map.Entry.comparingByValue()).orElse(null);
+        if (maxEntry != null) {
+            CarInsurance mostPopularCarInsurance = carInsuranceMapper.selectById(maxEntry.getKey());
+            if (mostPopularCarInsurance == null) {
+                log.info("未找到最受欢迎的汽车保险id对应的保险");
+            }
+            return mostPopularCarInsurance;
+        }
+        log.info("未找到最受欢迎的汽车保险");
+        return null;
+    }
 }

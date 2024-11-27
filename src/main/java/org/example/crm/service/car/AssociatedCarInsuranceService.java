@@ -1,6 +1,7 @@
 package org.example.crm.service.car;
 
 import org.example.crm.entity.car.CarInsurance;
+
 import java.util.List;//接收汽车保险数据
 /**
  * @author     ：eco
@@ -20,4 +21,10 @@ public interface AssociatedCarInsuranceService {
      * @return CommonResult 包含所有车险的列表
      */
     List<CarInsurance> getAllCarInsurances(); // 新增方法
+
+    /**
+     * 获取最受欢迎的旅游保险
+     * @return 旅游保险entity
+     */
+    CarInsurance getMostPopularCarInsurance();
 }

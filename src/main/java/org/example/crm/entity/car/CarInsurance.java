@@ -15,7 +15,7 @@ public class CarInsurance {
     /**
      * 车险id
      */
-    private Integer productId;
+    private Long productId;
 
     /**
      * 保险名称
@@ -61,5 +61,6 @@ public class CarInsurance {
      * 保险的好处
      */
     private String benefits;
+
 }
 
