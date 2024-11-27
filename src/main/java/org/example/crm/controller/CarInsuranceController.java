@@ -33,9 +33,12 @@ public class CarInsuranceController {
     public CommonResult<CarInsurance> getAssociatedCarInsurance(@RequestParam Long id) {
         CarInsurance carInsurance = associatedCarInsuranceService.getAssociatedCarInsurance(id);
         if (carInsurance == null) {
-            log.info("最受欢迎的汽车保险服务调用异常，出现null值");
-            return CommonResult.failed("最受欢迎的汽车保险服务调用异常，出现null值");
-
+            CarInsurance mostPopularCarInsurance = associatedCarInsuranceService.getMostPopularCarInsurance();
+            if(mostPopularCarInsurance == null){
+                log.info("最受欢迎的汽车保险服务调用异常，出现null值");
+                return CommonResult.failed("最受欢迎的汽车保险服务调用异常，出现null值");
+            }
+            return CommonResult.success(mostPopularCarInsurance);
         }
         return CommonResult.success(carInsurance);
     }

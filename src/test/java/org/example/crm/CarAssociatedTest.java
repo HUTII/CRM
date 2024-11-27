@@ -20,19 +20,26 @@ public class CarAssociatedTest {
 
     @Test
     public void getAssociatedCarInsurance() {
-        CarInsurance carInsurance = associatedCarInsuranceService.getAssociatedCarInsurance(5L);
-        System.out.println("关联算法选出的保险为：");
-        System.out.println(carInsurance);
+        for (long i = 1L; i <= 16L; i++) {
+            CarInsurance carInsurance = associatedCarInsuranceService.getAssociatedCarInsurance(i);
+            System.out.println("ID为" + i + "的汽车保险由关联算法选出的保险为");
+            System.out.println(carInsurance);
+            CarInsurance mostPopularCarInsurance = associatedCarInsuranceService.getMostPopularCarInsurance();
+            System.out.println("ID为" + i + "的车险推荐的最受欢迎保险为");
+            System.out.println(mostPopularCarInsurance);
+        }
+
     }
 
-    @Test
-    public void getAllCarInsurances() {
-        List<CarInsurance> carInsuranceList = associatedCarInsuranceService.getAllCarInsurances();
-        System.out.println("以下为目前所有可以选择的车险：");
-        if (carInsuranceList != null && !carInsuranceList.isEmpty()) {
-            carInsuranceList.forEach(System.out::println);
-        } else {
-            System.out.println("未找到任何车险记录！");
-        }
-    }
+
+//    @Test
+//    public void getAllCarInsurances() {
+//        List<CarInsurance> carInsuranceList = associatedCarInsuranceService.getAllCarInsurances();
+//        System.out.println("以下为目前所有可以选择的车险：");
+//        if (carInsuranceList != null && !carInsuranceList.isEmpty()) {
+//            carInsuranceList.forEach(System.out::println);
+//        } else {
+//            System.out.println("未找到任何车险记录！");
+//        }
+//    }
 }
